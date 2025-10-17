@@ -70,6 +70,7 @@ uint8_t spi_receive_char(SPI_TypeDef * SPIx)
 	return spi_transfer_byte(SPIx, 0xFF);
 }
 
+
 void spi_ss_enable(SPI_TypeDef * SPIx)
 {
 	if(SPIx == SPI1) {

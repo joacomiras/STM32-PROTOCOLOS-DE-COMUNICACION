@@ -6,6 +6,7 @@
 
 #define PIN_CONFIG_I2C 0xF // AF Output Open-Drain, 50MHz
 
+
 void i2c_init(I2C_TypeDef * I2Cx);
 
 void i2c_start(I2C_TypeDef * I2Cx);

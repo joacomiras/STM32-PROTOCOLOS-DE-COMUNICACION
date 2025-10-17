@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include "usart.h"
 
+
 // FUNCION DE CONFIGURACIÓN DEL RELOJ (Clock @ 72MHz) ---
 
 void SysClock_Config_72MHz(void) {

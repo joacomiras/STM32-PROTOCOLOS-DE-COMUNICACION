@@ -32,6 +32,7 @@ void usart_init(USART_TypeDef * USARTx, uint32_t BaudRate) {
         GPIOA->CRL |= (PIN_CONFIG_TX << 2*4); // PA2 (TX)
         GPIOA->CRL |= (PIN_CONFIG_RX << 3*4); // PA3 (RX)
     }
+    
     else if (USARTx == USART3)
     {
         // PB10-TX, PB11-RX

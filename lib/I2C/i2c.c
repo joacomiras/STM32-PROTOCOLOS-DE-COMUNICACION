@@ -59,6 +59,7 @@ void i2c_send_char(I2C_TypeDef * I2Cx, uint8_t data) {
 	I2Cx->DR = data; 
 }
 
+
 uint8_t i2c_receive_ack(I2C_TypeDef * I2Cx) {
 	I2Cx->CR1 |= I2C_CR1_ACK;
 	while (!(I2Cx->SR1 & I2C_SR1_RXNE));

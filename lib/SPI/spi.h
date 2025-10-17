@@ -8,6 +8,7 @@
 #define PIN_CONFIG_SPI_IN   0x4 // Input Floating (MISO)
 #define PIN_CONFIG_SPI_SS   0x3 // GP Output Push-pull, 50MHz (SS)
 
+
 void spi_init(SPI_TypeDef * SPIx, uint8_t mode);
 
 uint8_t spi_transfer_byte(SPI_TypeDef * SPIx, uint8_t data);
