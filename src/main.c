@@ -46,7 +46,7 @@ int main(void) {
     // Configurar el reloj a 72MHz
     SysClock_Config_72MHz(); 
 
-    usart_init(USART1, 115200);
+    usart_init(USART1, 9600);
     usart_send_char(USART1, 'A');
 
     while(1) {
