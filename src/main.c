@@ -40,16 +40,35 @@ void SysClock_Config_72MHz(void) {
     // Esperar a que el cambio se complete
     while ((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_PLL);
 }
+volatile uint32_t msTicks = 0; // Variable global para el conteo
 
+// Interrupción de SysTick (se llama cada 1ms)
+void SysTick_Handler(void) {
+    msTicks++;
+}
+
+// Inicializa el SysTick para 1ms (basado en 72MHz)
+void delay_Init(void) {
+    SysTick_Config(72000000 / 1000); // 72,000 ticks = 1ms
+}
+
+// Pausa la ejecución por 'ms' milisegundos
+void delay_ms(uint32_t ms) {
+    uint32_t startTicks = msTicks;
+    while ((msTicks - startTicks) < ms);
+}
 int main(void) {
-
+    char caracter_a_enviar='A';
     // Configurar el reloj a 72MHz
     SysClock_Config_72MHz(); 
-
+    delay_Init();
     usart_init(USART1, 9600);
-    usart_send_char(USART1, 'A');
-
+    delay_ms(100);
     while(1) {
+        // Hacer que un pin funcione como pulsador y que suceda esto cada vez que se presiona
+        /* usart_send_char(USART1, caracter_a_enviar);
+        delay_ms(1000);
+        caracter_a_enviar++;*/
     }
     return 0;
 }
