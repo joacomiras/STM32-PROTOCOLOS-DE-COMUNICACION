@@ -46,7 +46,28 @@ void spi_ds(SPI_TypeDef* spi_inst) {
     else if (spi_inst == SPI2) GPIOB->BSRR = GPIO_BSRR_BS12;
 }
 
-unsigned char spi_rw_byte(SPI_TypeDef* spi_inst, unsigned char dato) {
+void spi_8bit(SPI_TypeDef* spi_inst) {
+    while (spi_inst->SR & SPI_SR_BSY);
+    spi_inst->CR1 &= ~SPI_CR1_SPE;
+    spi_inst->CR1 &= ~SPI_CR1_DFF;
+    spi_inst->CR1 |= SPI_CR1_SPE;
+}
+
+unsigned char spi_8bit_rw(SPI_TypeDef* spi_inst, unsigned char dato) {
+    while (!(spi_inst->SR & SPI_SR_TXE));
+    spi_inst->DR = dato;
+    while (!(spi_inst->SR & SPI_SR_RXNE));
+    return spi_inst->DR;
+}
+
+void spi_16bit(SPI_TypeDef* spi_inst) {
+    while (spi_inst->SR & SPI_SR_BSY);
+    spi_inst->CR1 &= ~SPI_CR1_SPE;
+    spi_inst->CR1 |= SPI_CR1_DFF;
+    spi_inst->CR1 |= SPI_CR1_SPE;
+}
+
+uint16_t spi_16bit_rw(SPI_TypeDef* spi_inst, uint16_t dato) {
     while (!(spi_inst->SR & SPI_SR_TXE));
     spi_inst->DR = dato;
     while (!(spi_inst->SR & SPI_SR_RXNE));
